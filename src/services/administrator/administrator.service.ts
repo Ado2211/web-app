@@ -18,3 +18,7 @@ export class AdministratorService {
 return this.administrator.findOne(id);
     }
 }
+
+//add
+//editById
+//deleteById
