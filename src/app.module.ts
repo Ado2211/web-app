@@ -12,7 +12,8 @@ import { Feature } from 'entities/feature.entity';
 import { Order } from 'entities/order.entity';
 import { Photo } from 'entities/photo.entity';
 import { User } from 'entities/user.entity';
-import { AppController } from './app.controller';
+import { AdministratorController } from './controllers/api/administrator.controller';
+import { AppController } from './controllers/app.controller';
 import { AdministratorService } from './services/administrator/administrator.service';
 
 DatabaseConfiguration
@@ -42,7 +43,9 @@ DatabaseConfiguration
       ] 
     }), TypeOrmModule.forFeature([Administrator])
   ],
-  controllers: [AppController],
+  controllers: [AppController,
+    AdministratorController,
+  ],
   providers: [AdministratorService],
 })
 export class AppModule {}
