@@ -13,8 +13,10 @@ import { Order } from 'entities/order.entity';
 import { Photo } from 'entities/photo.entity';
 import { User } from 'entities/user.entity';
 import { AdministratorController } from './controllers/api/administrator.controller';
+import { CategoryController } from './controllers/api/category.controller';
 import { AppController } from './controllers/app.controller';
 import { AdministratorService } from './services/administrator/administrator.service';
+import { CategoryService } from './services/category/category.service';
 
 DatabaseConfiguration
 
@@ -27,7 +29,7 @@ DatabaseConfiguration
       username: DatabaseConfiguration.username,
       password: DatabaseConfiguration.password,
       database: DatabaseConfiguration.database,
-      entities: [ 
+      entities: [
         Administrator,
         ArticleFeature,
         ArticlePrice,
@@ -40,12 +42,20 @@ DatabaseConfiguration
         Photo,
         User,
 
-      ] 
-    }), TypeOrmModule.forFeature([Administrator])
+      ]
+    }), TypeOrmModule.forFeature([
+      Administrator,
+      Category,
+    ])
   ],
-  controllers: [AppController,
+  controllers: [
+    AppController,
     AdministratorController,
+    CategoryController
   ],
-  providers: [AdministratorService],
+  providers: [
+    AdministratorService,
+    CategoryService,
+  ],
 })
-export class AppModule {}
+export class AppModule { }

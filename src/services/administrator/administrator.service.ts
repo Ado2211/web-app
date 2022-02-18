@@ -36,7 +36,7 @@ export class AdministratorService {
             this.administrator.save(newAdmin)
                 .then(data => resolve(data))
                 .catch(error => {
-                    const response: ApiResponse = new ApiResponse("error", -1001, "Username is taken!");
+                    const response: ApiResponse = new ApiResponse("error", -1001, "Username is already taken!");
                     resolve(response)
                 });
 
