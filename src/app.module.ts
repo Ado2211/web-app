@@ -49,6 +49,9 @@ DatabaseConfiguration
       Administrator,
       Category,
       Article,
+      ArticlePrice,
+      ArticleFeature,
+      
     ])
   ],
   controllers: [
