@@ -40,11 +40,16 @@ export class Category {
   })
   parentCategoryId: number | null;
 
-  @OneToMany(() => Article, (article) => article.category)
+  @OneToMany(
+    () => Article, 
+    article => article.category
+    )
   articles: Article[];
 
-  @ManyToOne(() => Category, (category) => category.categories, {
-    onDelete: "RESTRICT",
+  @ManyToOne(
+    () => Category,
+     category => category.categories, {
+    onDelete: "NO ACTION",
     onUpdate: "CASCADE",
   })
   @JoinColumn([
@@ -52,9 +57,9 @@ export class Category {
   ])
   parentCategory: Category;
 
-  @OneToMany(() => Category, (category) => category.parentCategory)
+  @OneToMany(() => Category, category => category.parentCategory)
   categories: Category[];
 
-  @OneToMany(() => Feature, (feature) => feature.category)
+  @OneToMany(() => Feature, feature => feature.category)
   features: Feature[];
 }

@@ -23,6 +23,7 @@ export class ArticleService extends TypeOrmCrudService<Article> {
     }
 
     async createFullArticle(data: AddArticleDto): Promise<Article | ApiResponse> {
+      
       let newArticle: Article = new Article();
       newArticle.name       = data.name;
       newArticle.categoryId = data.categoryId;
@@ -32,7 +33,7 @@ export class ArticleService extends TypeOrmCrudService<Article> {
       let savedArticle = await this.article.save(newArticle);
 
       let newArticlePrice: ArticlePrice = new ArticlePrice();
-      newArticle.articleId = savedArticle.articleId;
+      newArticlePrice.articleId = savedArticle.articleId;
       newArticlePrice.price= data.price;
 
       await this.articlePrice.save(newArticlePrice);

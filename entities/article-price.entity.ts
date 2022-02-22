@@ -34,7 +34,7 @@ export class ArticlePrice {
   })
   createdAt: Date;
 
-  @ManyToOne(() => Article, (article) => article.articlePrices, {
+  @ManyToOne(() => Article, article => article.articlePrices, {
     onDelete: "RESTRICT",
     onUpdate: "CASCADE",
   })

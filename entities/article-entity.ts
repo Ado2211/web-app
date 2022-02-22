@@ -7,6 +7,7 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Category } from "./category.entity";
 import { ArticleFeature } from "./article-feature.entity";
@@ -15,18 +16,13 @@ import { CartArticle } from "./cart-article.entity";
 import { Photo } from "./photo.entity";
 import { Feature } from "./feature.entity";
 
-@Index("FK_article_category", ["categoryId"], {})
+@Index("fk_article_category", ["categoryId"], {})
 @Entity("article")
 export class Article {
-  @Column("int", {
-    primary: true,
-    name: "article_id",
-    unsigned: true,
-    default: () => "'0'",
-  })
+  @PrimaryGeneratedColumn({type: "int", name: "article_id", unsigned: true })
   articleId: number;
 
-  @Column("varchar", { length: 128, default: () => "'0'" })
+  @Column("varchar", { length: 128, })
   name: string;
 
   @Column("int", { name: "category_id", unsigned: true, })
@@ -41,7 +37,7 @@ export class Article {
   @Column("enum", {
     name: "status",
     enum: ["available", "visible", "hidden"],
-    
+    default: () => "'available'"
   })
   status: "available" | "visible" | "hidden";
 
@@ -57,17 +53,20 @@ export class Article {
   })
   createdAt: Date;
 
-  @ManyToOne(() => Category, (category) => category.articles, {
-    onDelete: "RESTRICT",
+  @ManyToOne(
+    () => Category, 
+    category => category.articles, {
+    onDelete: "NO ACTION",
     onUpdate: "CASCADE",
   })
   @JoinColumn([{ name: "category_id", referencedColumnName: "categoryId" }])
   category: Category;
 
-  @OneToMany(() => ArticleFeature, (articleFeature) => articleFeature.article)
+  @OneToMany(
+    () => ArticleFeature, articleFeature => articleFeature.article)
   articleFeatures: ArticleFeature[];
 
-  @ManyToMany(type => Feature, feature => feature)
+  @ManyToMany(type => Feature, feature => feature.articles)
   @JoinTable({
     name: "article_feature",
     joinColumn: { name: "article_id", referencedColumnName: "articleId" },
@@ -75,12 +74,12 @@ export class Article {
   })
   features: Feature[];
 
-  @OneToMany(() => ArticlePrice, (articlePrice) => articlePrice.article)
+  @OneToMany(() => ArticlePrice, articlePrice => articlePrice.article)
   articlePrices: ArticlePrice[];
 
-  @OneToMany(() => CartArticle, (cartArticle) => cartArticle.article)
+  @OneToMany(() => CartArticle, cartArticle => cartArticle.article)
   cartArticles: CartArticle[];
 
-  @OneToMany(() => Photo, (photo) => photo.article)
+  @OneToMany(() => Photo, photo => photo.article)
   photos: Photo[];
 }
