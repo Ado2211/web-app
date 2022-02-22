@@ -14,6 +14,7 @@ import { Photo } from 'entities/photo.entity';
 import { User } from 'entities/user.entity';
 import { AdministratorController } from './controllers/api/administrator.controller';
 import { ArticleController } from './controllers/api/article.controller';
+import { AuthController } from './controllers/api/auth.controller';
 import { CategoryController } from './controllers/api/category.controller';
 import { AppController } from './controllers/app.controller';
 import { AdministratorService } from './services/administrator/administrator.service';
@@ -59,6 +60,7 @@ DatabaseConfiguration
     AdministratorController,
     CategoryController,
     ArticleController,
+    AuthController,
   ],
   providers: [
     AdministratorService,
