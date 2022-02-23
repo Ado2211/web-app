@@ -4,7 +4,7 @@ import { AdministratorService } from "src/services/administrator/administrator.s
 import * as jwt from 'jsonwebtoken';
 import { JwtDataAdministratorDto } from "src/dtos/administrator/jwt.data.administrator.dto";
 import { jwtSecret } from "config/jwt.secret";
-import { JwtDataDto } from "src/dtos/auth/jwt.data.dto";
+
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
