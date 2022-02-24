@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Param, Post, Req, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Crud } from "@nestjsx/crud";
 import { Article } from "entities/article-entity";
@@ -65,7 +65,7 @@ export class ArticleController {
                     let original: string = file.originalname;
 
                     let normalized = original.replace(/\s+/g, '-');
-                    normalized = normalized.replace(/[^A-z0-9\.\-]/g,'');
+                    normalized = normalized.replace(/[^A-z0-9\.\-]/g, '');
                     let sada = new Date();
                     let datePart = '';
                     datePart += sada.getFullYear();
@@ -76,7 +76,7 @@ export class ArticleController {
                         new Array(10)
                             .fill(0)
                             .map(e => (Math.random() * 9).toFixed(0).toString())
-                            .join('');1
+                            .join(''); 1
 
                     let fileName = datePart + '-' + randomPart + '-' + normalized;
                     fileName = fileName.toLowerCase();
@@ -88,24 +88,42 @@ export class ArticleController {
                 // 2. check tipa sadrzaja: image/jpg, image/ png(mimetype)
 
                 if (!file.originalname.toLowerCase().match(/\.(jpg|png)$/)) {
-                    callback(new Error('Bad file extensions'), false);
+                    req.fileFilterError = 'Bad file extension!';
+                    callback(null, false);
                     return;
                 }
 
-                if (!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))){
-                    callback(new Error('Bad file content'), false);
+                if (!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))) {
+                    req.fileFilterError = 'Bad file content!';
+                    callback(null, false);
                     return;
                 }
-                callback(null,true);
+                callback(null, true);
             },
-           limits: {
-               files: 1,
-               fieldSize: StorageConfig.photoMaxFileSize,
-           },
+            limits: {
+                files: 1,
+                fileSize: StorageConfig.photoMaxFileSize,
+            },
         })
     )
 
-    async uploadPhoto(@Param('id') articleId: number, @UploadedFile() photo): Promise<ApiResponse | Photo> {
+    async uploadPhoto(
+        @Param('id') articleId: number,
+        @UploadedFile() photo,
+        @Req() req
+
+    ): Promise<ApiResponse | Photo> {
+        if (req.fileFilterError) {
+            return new ApiResponse('error', -4002, req.fileFilterError);
+        }
+
+        if(!photo) {
+            return new ApiResponse('error', -4002, 'File not uploaded!')
+        }
+
+        //to do :real mime type check
+        //to do : save a resized file
+
 
         const newPhoto: Photo = new Photo();
         newPhoto.articleId = articleId;
