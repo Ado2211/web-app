@@ -9,6 +9,8 @@ import { StorageConfig } from "config/storage.config";
 import { PhotoService } from "src/services/photo/photo.service";
 import { Photo } from "entities/photo.entity";
 import { ApiResponse } from "src/misc/api.response.class";
+import * as fileType from 'file-type';
+import * as fs from 'fs';
 
 @Controller('api/article')
 @Crud({
@@ -94,7 +96,7 @@ export class ArticleController {
                 }
 
                 if (!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))) {
-                    req.fileFilterError = 'Bad file content!';
+                    req.fileFilterError = 'Bad file content type!';
                     callback(null, false);
                     return;
                 }
@@ -121,7 +123,21 @@ export class ArticleController {
             return new ApiResponse('error', -4002, 'File not uploaded!')
         }
 
-        //to do :real mime type check
+        //:real mime type check npm i file-type
+       
+          const fileTypeResult=  await fileType.fromFile(photo.path);
+        if (!fileTypeResult) {
+            fs.unlinkSync(photo.path);
+            return new ApiResponse('error', -4002, 'Cannot detect file type!');
+        }
+
+        const realMimeType = fileTypeResult.mime;
+        if (!(realMimeType.includes('jpeg') || realMimeType.includes('png'))) {
+            fs.unlinkSync(photo.path);
+            return new ApiResponse('error', -4002, 'Bad file content type!');
+        }
+      
+
         //to do : save a resized file
 
 
