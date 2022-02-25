@@ -35,6 +35,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "sharp": "^0.30.1",
     "typeorm": "^0.2.41",
     "typeorm-model-generator": "^0.4.6"
   },
