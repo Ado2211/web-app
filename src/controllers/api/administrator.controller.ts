@@ -19,7 +19,7 @@ export class AdministratorController {
     @UseGuards(RoleCheckerGuard)
     @AllowToRoles('administrator')
    
-    getAllAdmins(): Promise<Administrator[]> {
+    getAll(): Promise<Administrator[]> {
         return this.administratorService.getAll();
     }
 
