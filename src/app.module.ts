@@ -24,6 +24,7 @@ import { ArticleService } from './services/article/article.service';
 import { CategoryService } from './services/category/category.service';
 import { FeatureService } from './services/feature/feature.service';
 import { PhotoService } from './services/photo/photo.service';
+import { UserService } from './services/user/user.service';
 
 DatabaseConfiguration
 
@@ -79,6 +80,7 @@ DatabaseConfiguration
     ArticleService,
     PhotoService,
     FeatureService,
+    UserService,
 
   ],
   exports: [
