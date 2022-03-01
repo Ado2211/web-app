@@ -85,6 +85,7 @@ DatabaseConfiguration
   ],
   exports: [
     AdministratorService,
+    UserService,
   ]
 })
 export class AppModule implements NestModule{
