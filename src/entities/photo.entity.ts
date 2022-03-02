@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Article } from "./article-entity";
+import { Article } from "./article.entity";
 
 @Index("fk_photo_article_id", ["articleId"], {})
 @Index("uq_photo_image_path", ["imagePath"], { unique: true })

@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfiguration } from 'config/database.configuration';
 import { Administrator } from 'src/entities/administrator.entity';
-import { Article } from 'src/entities/article-entity';
+import { Article } from 'src/entities/article.entity';
 import { ArticleFeature } from 'src/entities/article-feature.entity';
 import { ArticlePrice } from 'src/entities/article-price.entity';
 import { CartArticle } from 'src/entities/cart-article.entity';
@@ -21,10 +21,12 @@ import { AppController } from './controllers/app.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { AdministratorService } from './services/administrator/administrator.service';
 import { ArticleService } from './services/article/article.service';
+import { CartService } from './services/cart/cart.service';
 import { CategoryService } from './services/category/category.service';
 import { FeatureService } from './services/feature/feature.service';
 import { PhotoService } from './services/photo/photo.service';
 import { UserService } from './services/user/user.service';
+import { UserCartController } from './controllers/api/user.cart.controller';
 
 DatabaseConfiguration
 
@@ -73,6 +75,7 @@ DatabaseConfiguration
     ArticleController,
     AuthController,
     FeatureController,
+    UserCartController,
   ],
   providers: [
     AdministratorService,
@@ -81,6 +84,8 @@ DatabaseConfiguration
     PhotoService,
     FeatureService,
     UserService,
+    CartService,
+
 
   ],
   exports: [

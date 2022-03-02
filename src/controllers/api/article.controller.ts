@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Article } from "src/entities/article-entity";
+import { Article } from "src/entities/article.entity";
 import { ArticleService } from "src/services/article/article.service";
 import { AddArticleDto } from "src/dtos/article/add.article.dto";
 import { FileInterceptor } from '@nestjs/platform-express';

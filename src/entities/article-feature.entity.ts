@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Article } from "./article-entity";
+import { Article } from "./article.entity";
 import { Feature } from "./feature.entity";
 
 @Index("fk_article_feature_feature_id", ["featureId"], {})

@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Article } from "./article-entity";
+import { Article } from "./article.entity";
 import { Cart } from "./cart.entity";
 
 @Index("fk_cart_article_article_id", ["articleId"], {})

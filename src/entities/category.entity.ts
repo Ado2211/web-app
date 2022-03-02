@@ -7,7 +7,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Article } from "./article-entity";
+import { Article } from "./article.entity";
 import { Feature } from "./feature.entity";
 
 @Index("fk_category_parent__category_id", ["parentCategoryId"], {})

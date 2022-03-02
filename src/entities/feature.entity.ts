@@ -9,7 +9,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Article } from "./article-entity";
+import { Article } from "./article.entity";
 import { ArticleFeature } from "./article-feature.entity";
 import { Category } from "./category.entity";
 
