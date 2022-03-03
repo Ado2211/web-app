@@ -27,6 +27,7 @@ import { FeatureService } from './services/feature/feature.service';
 import { PhotoService } from './services/photo/photo.service';
 import { UserService } from './services/user/user.service';
 import { UserCartController } from './controllers/api/user.cart.controller';
+import { OrderService } from './services/order/order.servise';
 
 DatabaseConfiguration
 
@@ -85,6 +86,8 @@ DatabaseConfiguration
     FeatureService,
     UserService,
     CartService,
+    OrderService,
+    
 
 
   ],

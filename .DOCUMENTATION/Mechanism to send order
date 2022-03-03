@@ -1,0 +1,6 @@
+User :: make an order
+1. Da li u aktivnoj korpi korisnika postoji dodata roba?
+ - Ne: ne može da se napravi porudzbina: eror
+ - Da: Pravimo poruzdbinu za tu korpu
+ 
+2. Vracamo informacije o porudzbini
