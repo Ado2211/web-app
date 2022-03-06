@@ -12,6 +12,7 @@ import { CartArticle } from "./cart-article.entity";
 import { User } from "./user.entity";
 import { Order } from "./order.entity";
 
+
 @Index("fk_cart_user_id", ["userId"], {})
 @Entity("cart")
 export class Cart {
