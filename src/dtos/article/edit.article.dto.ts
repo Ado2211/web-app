@@ -16,7 +16,7 @@ export class EditArticleDto {
 
     @Validator.IsNotEmpty()
     @Validator.IsString()
-    @Validator.Length(64, 10000)
+    @Validator.Length(10, 10000)
     description: string;
 
     @Validator.IsNotEmpty()

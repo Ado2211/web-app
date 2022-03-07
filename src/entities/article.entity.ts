@@ -41,7 +41,7 @@ export class Article {
   @Column("text", { name: "description" })
   @Validator.IsNotEmpty()
   @Validator.IsString()
-  @Validator.Length(64, 10000)
+  @Validator.Length(10, 10000)
   description: string;
 
   @Column("enum", {
