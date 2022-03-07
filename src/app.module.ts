@@ -28,6 +28,9 @@ import { PhotoService } from './services/photo/photo.service';
 import { UserService } from './services/user/user.service';
 import { UserCartController } from './controllers/api/user.cart.controller';
 import { OrderService } from './services/order/order.servise';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { MailConfig } from 'config/mail.config';
+import { OrderMailer } from './services/order/order.mailer.service';
 
 DatabaseConfiguration
 
@@ -66,8 +69,24 @@ DatabaseConfiguration
       Order,
       Photo,
       User,
-      
-    ])
+    ]),
+    MailerModule.forRoot({
+      transport: {
+        host: MailConfig.hostname,
+        port: 587,
+        secure: false,
+        auth: {
+          user: MailConfig.username,
+          pass: MailConfig.password,
+        },
+        tls:{
+          rejectUnauthorized:false
+        }
+      },
+      defaults: {
+        from: MailConfig.senderEmail,
+      },
+    }),
   ],
   controllers: [
     AppController,
@@ -87,9 +106,8 @@ DatabaseConfiguration
     UserService,
     CartService,
     OrderService,
+    OrderMailer,
     
-
-
   ],
   exports: [
     AdministratorService,
