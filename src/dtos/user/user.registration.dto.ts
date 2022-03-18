@@ -27,7 +27,7 @@ export class UserRegistrationDto {
     surname: string;
 
     @Validator.IsNotEmpty()
-    @Validator.IsPhoneNumber(null)
+    @Validator.IsPhoneNumber()
     phoneNumber: string;
 
     @Validator.IsNotEmpty()
