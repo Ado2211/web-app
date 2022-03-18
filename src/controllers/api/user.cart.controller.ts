@@ -9,7 +9,7 @@ import { ApiResponse } from "src/misc/api.response.class";
 import { RoleCheckerGuard } from "src/misc/role.checker.guard";
 import { CartService } from "src/services/cart/cart.service";
 import { OrderMailer } from "src/services/order/order.mailer.service";
-import { OrderService } from "src/services/order/order.servise";
+import { OrderService } from "src/services/order/order.service";
 
 @Controller('api/user/cart')
 export class UserCartController {

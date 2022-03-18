@@ -240,7 +240,7 @@ export class ArticleController {
     @UseGuards(RoleCheckerGuard)
     @AllowToRoles('administrator', 'user')
      async search(@Body() data: ArticleSearchDto): Promise<Article[]> {
-         return await this.service.search(data);
+         return;
      }
 
     

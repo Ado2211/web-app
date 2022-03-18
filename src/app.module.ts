@@ -1,10 +1,12 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { AppController } from './controllers/app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfiguration } from 'config/database.configuration';
 import { Administrator } from 'src/entities/administrator.entity';
-import { Article } from 'src/entities/article.entity';
+import { AdministratorService } from './services/administrator/administrator.service';
 import { ArticleFeature } from 'src/entities/article-feature.entity';
 import { ArticlePrice } from 'src/entities/article-price.entity';
+import { Article } from 'src/entities/article.entity';
 import { CartArticle } from 'src/entities/cart-article.entity';
 import { Cart } from 'src/entities/cart.entity';
 import { Category } from 'src/entities/category.entity';
@@ -13,28 +15,25 @@ import { Order } from 'src/entities/order.entity';
 import { Photo } from 'src/entities/photo.entity';
 import { User } from 'src/entities/user.entity';
 import { AdministratorController } from './controllers/api/administrator.controller';
+import { CategoryController } from './controllers/api/category.controller';
+import { CategoryService } from './services/category/category.service';
+import { ArticleService } from './services/article/article.service';
 import { ArticleController } from './controllers/api/article.controller';
 import { AuthController } from './controllers/api/auth.controller';
-import { CategoryController } from './controllers/api/category.controller';
-import { FeatureController } from './controllers/api/feature.controller';
-import { AppController } from './controllers/app.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
-import { AdministratorService } from './services/administrator/administrator.service';
-import { ArticleService } from './services/article/article.service';
-import { CartService } from './services/cart/cart.service';
-import { CategoryService } from './services/category/category.service';
-import { FeatureService } from './services/feature/feature.service';
 import { PhotoService } from './services/photo/photo.service';
+import { FeatureService } from './services/feature/feature.service';
+import { FeatureController } from './controllers/api/feature.controller';
 import { UserService } from './services/user/user.service';
+import { CartService } from './services/cart/cart.service';
 import { UserCartController } from './controllers/api/user.cart.controller';
-import { OrderService } from './services/order/order.servise';
+import { OrderService } from './services/order/order.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailConfig } from 'config/mail.config';
 import { OrderMailer } from './services/order/order.mailer.service';
 import { AdministratorOrderController } from './controllers/api/administrator.order.controller';
-import { UserToken } from './entities/user_token.entity';
-
-DatabaseConfiguration
+import { UserToken } from './entities/user-token.entity';
+import { AdministratorToken } from './entities/administrator-token.entity';
 
 @Module({
   imports: [
@@ -58,9 +57,10 @@ DatabaseConfiguration
         Photo,
         User,
         UserToken,
-
+        AdministratorToken,
       ]
-    }), TypeOrmModule.forFeature([
+    }),
+    TypeOrmModule.forFeature([
       Administrator,
       ArticleFeature,
       ArticlePrice,
@@ -73,20 +73,12 @@ DatabaseConfiguration
       Photo,
       User,
       UserToken,
+      AdministratorToken,
     ]),
     MailerModule.forRoot({
-      transport: {
-        host: MailConfig.hostname,
-        port: 587,
-        secure: false,
-        auth: {
-          user: MailConfig.username,
-          pass: MailConfig.password,
-        },
-        tls:{
-          rejectUnauthorized:false
-        }
-      },
+      transport: 'smtps://' + MailConfig.username + ':' +
+                              MailConfig.password + '@' +
+                              MailConfig.hostname,
       defaults: {
         from: MailConfig.senderEmail,
       },
@@ -112,18 +104,17 @@ DatabaseConfiguration
     CartService,
     OrderService,
     OrderMailer,
-    
   ],
   exports: [
     AdministratorService,
     UserService,
-  ]
+  ],
 })
-export class AppModule implements NestModule{
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-    .apply(AuthMiddleware)
-    .exclude('auth/*')
-    .forRoutes('api/*');
+      .apply(AuthMiddleware)
+      .exclude('auth/*')
+      .forRoutes('api/*');
   }
 }

@@ -4,7 +4,7 @@ import { Order } from "src/entities/order.entity";
 import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 import { ApiResponse } from "src/misc/api.response.class";
 import { RoleCheckerGuard } from "src/misc/role.checker.guard";
-import { OrderService } from "src/services/order/order.servise";
+import { OrderService } from "src/services/order/order.service";
 
 @Controller('api/order')
 export class AdministratorOrderController {
