@@ -10,9 +10,16 @@
 			"item": [
 				{
 					"name": "Get all administrators",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/administrator/",
 							"protocol": "http",
@@ -689,10 +696,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"ACME HD11 1T\",\r\n    \"categoryId\": 5,\r\n    \"excerpt\": \"Neki kratak tekst...\",\r\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\r\n    \"price\": 56.80,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 1,\r\n            \"value\": \"1TB\"\r\n        },\r\n\r\n        {\r\n            \r\n            \"featureId\": 3,\r\n            \"value\": \"SSD\"\r\n        }\r\n    ]\r\n}"
+							"raw": "{\r\n    \"name\": \"ACME sssHD11 1T\",\r\n    \"categoryId\": 5,\r\n    \"excerpt\": \"Neki kratak tekst...\",\r\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\r\n    \"price\": 56.80,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 1,\r\n            \"value\": \"1TB\"\r\n        },\r\n\r\n        {\r\n            \r\n            \"featureId\": 3,\r\n            \"value\": \"SSD\"\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/article/createFull",
+							"raw": "http://localhost:3000/api/article/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -701,7 +708,7 @@
 							"path": [
 								"api",
 								"article",
-								"createFull"
+								""
 							]
 						}
 					},
@@ -945,7 +952,21 @@
 					"name": "Get a single article",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/25/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"25",
+								""
+							]
+						}
 					},
 					"response": [
 						{
@@ -1003,6 +1024,89 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"articleId\": 2,\n    \"name\": \"ACME HD11 1T\",\n    \"categoryId\": 5,\n    \"excerpt\": \"Neki kratak tekst...\",\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\n    \"status\": \"available\",\n    \"isPromoted\": 0,\n    \"createdAt\": \"2022-02-21T15:34:14.000Z\",\n    \"category\": {\n        \"categoryId\": 5,\n        \"name\": \"Hard diskovi\",\n        \"imagePath\": \"assets/hdds.jpg\",\n        \"parentCategoryId\": 4\n    },\n    \"photos\": [\n        {\n            \"photoId\": 5,\n            \"articleId\": 2,\n            \"imagePath\": \"2022223-8783935643-screenshot_2.jpg\"\n        }\n    ],\n    \"articlePrices\": [],\n    \"articleFeatures\": [],\n    \"features\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get many articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a many articles with filter",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/article/?filter=categoryId||$eq||4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										""
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "categoryId||$eq||4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "981"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d5-2Lmr5H4As7/lVgznLv6puCg+fT8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Mar 2022 22:22:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articleId\": 1,\n        \"name\": \"Kingston 1TB\",\n        \"categoryId\": 4,\n        \"excerpt\": \"Neki kratak tekst...\",\n        \"description\": \"Neki malo duzi tekst o proizvodu\",\n        \"status\": \"visible\",\n        \"isPromoted\": 1,\n        \"createdAt\": \"2022-02-18T22:32:47.000Z\",\n        \"category\": {\n            \"categoryId\": 4,\n            \"name\": \"Memorijski mediji\",\n            \"imagePath\": \"assets/pc/memory.jpg\",\n            \"parentCategoryId\": 1\n        },\n        \"photos\": [],\n        \"articlePrices\": [\n            {\n                \"articlePriceId\": 1,\n                \"articleId\": 1,\n                \"price\": \"45.00\",\n                \"createdAt\": \"2022-02-19T15:42:11.000Z\"\n            },\n            {\n                \"articlePriceId\": 2,\n                \"articleId\": 1,\n                \"price\": \"43.50\",\n                \"createdAt\": \"2022-02-19T15:42:31.000Z\"\n            },\n            {\n                \"articlePriceId\": 22,\n                \"articleId\": 1,\n                \"price\": \"57.10\",\n                \"createdAt\": \"2022-02-28T14:27:22.000Z\"\n            },\n            {\n                \"articlePriceId\": 24,\n                \"articleId\": 1,\n                \"price\": \"57.20\",\n                \"createdAt\": \"2022-02-28T14:31:17.000Z\"\n            }\n        ],\n        \"articleFeatures\": [\n            {\n                \"articleFeatureId\": 14,\n                \"articleId\": 1,\n                \"featureId\": 1,\n                \"value\": \"1024GB\"\n            },\n            {\n                \"articleFeatureId\": 15,\n                \"articleId\": 1,\n                \"featureId\": 2,\n                \"value\": \"SATA 3.0\"\n            }\n        ],\n        \"features\": [\n            {\n                \"featureId\": 1,\n                \"name\": \"Kapacitet\",\n                \"categoryId\": 5\n            },\n            {\n                \"featureId\": 2,\n                \"name\": \"Napon\",\n                \"categoryId\": 5\n            }\n        ]\n    }\n]"
 						}
 					]
 				},
@@ -1096,7 +1200,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Kingston 1TB\",\r\n    \"categoryId\": 5,\r\n    \"excerpt\": \"Neki kratak tekst...\",\r\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\r\n    \"status\": \"visible\",\r\n    \"isPromoted\": 1,\r\n    \"price\": 57.20,\r\n    \"features\": null\r\n}",
+							"raw": "{\r\n    \"name\": \"Kingston 1TB\",\r\n    \"categoryId\": 4,\r\n    \"excerpt\": \"Neki kratak tekst.gffh..\",\r\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\r\n    \"status\": \"visible\",\r\n    \"isPromoted\": 1,\r\n    \"price\": 57.20,\r\n    \"features\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1193,7 +1297,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Kingston 1TB\",\r\n    \"categoryId\": 5,\r\n    \"excerpt\": \"Neki kratak tekst...\",\r\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\r\n    \"status\": \"visible\",\r\n    \"isPromoted\": 1,\r\n    \"price\": 57.20,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 1,\r\n            \"value\": \"1024GB\"\r\n        },\r\n        {\r\n            \"featureId\": 2,\r\n            \"value\": \"SATA 3.0\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"name\": \"Kingston 1TB\",\r\n    \"categoryId\": 5,\r\n    \"excerpt\": \"Neki kratak tekst...\",\r\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\r\n    \"status\": \"visible\",\r\n    \"isPromoted\": 1,\r\n    \"price\": 59.20,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 1,\r\n            \"value\": \"1024GB\"\r\n        },\r\n        {\r\n            \"featureId\": 2,\r\n            \"value\": \"SATA 3.0\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1282,6 +1386,186 @@
 							"body": "{\n    \"articleId\": 1,\n    \"name\": \"Kingston 1TB\",\n    \"categoryId\": 5,\n    \"excerpt\": \"Neki kratak tekst...\",\n    \"description\": \"Neki malo duzi tekst o proizvodu\",\n    \"status\": \"visible\",\n    \"isPromoted\": 1,\n    \"createdAt\": \"2022-02-18T22:32:47.000Z\",\n    \"category\": {\n        \"categoryId\": 5,\n        \"name\": \"Hard diskovi\",\n        \"imagePath\": \"assets/hdds.jpg\",\n        \"parentCategoryId\": 4\n    },\n    \"articleFeatures\": [\n        {\n            \"articleFeatureId\": 14,\n            \"articleId\": 1,\n            \"featureId\": 1,\n            \"value\": \"1024GB\"\n        },\n        {\n            \"articleFeatureId\": 15,\n            \"articleId\": 1,\n            \"featureId\": 2,\n            \"value\": \"SATA 3.0\"\n        }\n    ],\n    \"features\": [\n        {\n            \"featureId\": 1,\n            \"name\": \"Kapacitet\",\n            \"categoryId\": 5\n        },\n        {\n            \"featureId\": 2,\n            \"name\": \"Napon\",\n            \"categoryId\": 5\n        }\n    ],\n    \"articlePrices\": [\n        {\n            \"articlePriceId\": 1,\n            \"articleId\": 1,\n            \"price\": \"45.00\",\n            \"createdAt\": \"2022-02-19T15:42:11.000Z\"\n        },\n        {\n            \"articlePriceId\": 2,\n            \"articleId\": 1,\n            \"price\": \"43.50\",\n            \"createdAt\": \"2022-02-19T15:42:31.000Z\"\n        },\n        {\n            \"articlePriceId\": 22,\n            \"articleId\": 1,\n            \"price\": \"57.10\",\n            \"createdAt\": \"2022-02-28T14:27:22.000Z\"\n        },\n        {\n            \"articlePriceId\": 24,\n            \"articleId\": 1,\n            \"price\": \"57.20\",\n            \"createdAt\": \"2022-02-28T14:31:17.000Z\"\n        }\n    ]\n}"
 						}
 					]
+				},
+				{
+					"name": "Search articles",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": 5,\r\n    \"keywords\": \"t\",\r\n    \"priceMin\": 5,\r\n    \"priceMax\": 70,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 2,\r\n            \"values\": \"SATA 3.0\"\r\n        },\r\n        {\r\n            \"featureId\": 3,\r\n            \"values\": [ \"SSD\" ]\r\n        }\r\n    ],\r\n    \"orderBy\": \"price\",\r\n    \"orderDirection\": \"DESC\"\r\n     \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/search/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"search",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search articles succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\": 5,\r\n    \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/search/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"search",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "213"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d5-aErjB5TOVuAx4BB/mTPNkB3NZDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 07 Mar 2022 00:06:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articleId\": 1,\n        \"name\": \"Kingston 1TB\",\n        \"categoryId\": 4,\n        \"excerpt\": \"Neki kratak tekst.gffh..\",\n        \"description\": \"Neki malo duzi tekst o proizvodu\",\n        \"status\": \"visible\",\n        \"isPromoted\": 1,\n        \"createdAt\": \"2022-02-18T22:32:47.000Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get articles by category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/category/5/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"5",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get articles by category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/category/5/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category",
+										"5",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "266"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10a-IIspIIX/SFdv7dHnRzLByfn09dg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Mar 2022 16:36:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 5,\n    \"name\": \"Hard diskovi\",\n    \"imagePath\": \"assets/hdds.jpg\",\n    \"parentCategoryId\": 4,\n    \"categories\": [],\n    \"features\": [\n        {\n            \"featureId\": 1,\n            \"name\": \"Kapacitet\",\n            \"categoryId\": 5\n        },\n        {\n            \"featureId\": 2,\n            \"name\": \"Napon\",\n            \"categoryId\": 5\n        },\n        {\n            \"featureId\": 3,\n            \"name\": \"Tehnologija\",\n            \"categoryId\": 5\n        }\n    ]\n}"
+						}
+					]
 				}
 			],
 			"auth": {
@@ -1289,7 +1573,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjUsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE2NDY3NzM4MDYuMDIyLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yOS4wIiwiaWF0IjoxNjQ1NTY0MjA2fQ.cN4mgTugAJjOLj_v5-1yF41WvQlAyYzoOBnz61vPdFI",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjoxLCJpZGVudGl0eSI6InRlc3RAdGVzdC5iaCIsImV4cCI6MTY1MDQ3MjY1OC40NTUsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI5LjAiLCJpYXQiOjE2NDc3OTQyNTh9.FpB4XM2UUcVK3iLhKg3T15uDDsjKmIXHf2up9P-Ou1U",
 						"type": "string"
 					}
 				]
@@ -1334,7 +1618,7 @@
 							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/login/",
+							"raw": "http://localhost:3000/auth/administrator/login/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1342,6 +1626,7 @@
 							"port": "3000",
 							"path": [
 								"auth",
+								"administrator",
 								"login",
 								""
 							]
@@ -1714,7 +1999,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@test.bh\",\r\n    \"password\": \"abc\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test@test.bh\",\r\n    \"password\": \"test@test.bh\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1803,6 +2088,60 @@
 							"body": "{\n    \"id\": 1,\n    \"identity\": \"test@test.bh\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjoxLCJpZGVudGl0eSI6InRlc3RAdGVzdC5iaCIsImV4cCI6MTY0NzM3Mjg4OC40MzYsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI5LjAiLCJpYXQiOjE2NDYxNjMyODh9.5Wsl9eBiblR0W0nKEh1BrQDtzNkynYiO_WrbebyWB2A\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Refresh user token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/user/refresh/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"user",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -1815,7 +2154,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/administrator/",
+							"raw": "http://localhost:3000/api/feature/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1823,7 +2162,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"administrator",
+								"feature",
 								""
 							]
 						}
@@ -1892,7 +2231,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/administrator/",
+							"raw": "http://localhost:3000/api/feature/1/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1900,7 +2239,8 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"administrator",
+								"feature",
+								"1",
 								""
 							]
 						}
@@ -2214,6 +2554,326 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"featureId\": 2,\n    \"name\": \"Napon\",\n    \"categoryId\": 5,\n    \"category\": {\n        \"categoryId\": 5,\n        \"name\": \"Hard diskovi\",\n        \"imagePath\": \"assets/hdds.jpg\",\n        \"parentCategoryId\": 4\n    },\n    \"articleFeatures\": [\n        {\n            \"articleFeatureId\": 2,\n            \"articleId\": 1,\n            \"featureId\": 2,\n            \"value\": \"SATA3\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cart and Order",
+			"item": [
+				{
+					"name": "Get current cart details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/user/cart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add article to the current cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"articleId\": 1,\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/cart/addToCart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"cart",
+								"addToCart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change article quantity in the current cart",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"articleId\": 1,\r\n    \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/cart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make an order to current cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/user/cart/makeOrder/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"cart",
+								"makeOrder",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjoxLCJpZGVudGl0eSI6InRlc3RAdGVzdC5iaCIsImV4cCI6MTY0NzM3Mjg4OC40MzYsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI5LjAiLCJpYXQiOjE2NDYxNjMyODh9.5Wsl9eBiblR0W0nKEh1BrQDtzNkynYiO_WrbebyWB2A",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "get order information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/order/23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"order",
+								"23"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get order information succes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/order/23",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"order",
+										"23"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1315"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"523-0xSyvVm+zTwhBJvOg8tcz8gMGo4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:38:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"orderId\": 23,\n    \"createdAt\": \"2022-03-07T15:38:19.000Z\",\n    \"cartId\": 21,\n    \"status\": \"pending\",\n    \"cart\": {\n        \"cartId\": 21,\n        \"userId\": 1,\n        \"createdAt\": \"2022-03-07T15:38:16.000Z\",\n        \"user\": {\n            \"userId\": 1,\n            \"email\": \"test@test.bh\",\n            \"passwordHash\": \"DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F\",\n            \"forename\": \"Adnan\",\n            \"surname\": \"Mahmic\",\n            \"phoneNumber\": \"+387 838 838\",\n            \"postalAddres\": \"Nepoznata adresa bb\"\n        },\n        \"cartArticles\": [\n            {\n                \"cartArticleId\": 23,\n                \"cartId\": 21,\n                \"articleId\": 1,\n                \"quantity\": 2,\n                \"article\": {\n                    \"articleId\": 1,\n                    \"name\": \"Kingston 1TB\",\n                    \"categoryId\": 5,\n                    \"excerpt\": \"Neki kratak tekst...\",\n                    \"description\": \"Neki malo duzi tekst o proizvodu\",\n                    \"status\": \"visible\",\n                    \"isPromoted\": 1,\n                    \"createdAt\": \"2022-02-18T22:32:47.000Z\",\n                    \"category\": {\n                        \"categoryId\": 5,\n                        \"name\": \"Hard diskovi\",\n                        \"imagePath\": \"assets/hdds.jpg\",\n                        \"parentCategoryId\": 4\n                    },\n                    \"articlePrices\": [\n                        {\n                            \"articlePriceId\": 1,\n                            \"articleId\": 1,\n                            \"price\": \"45.00\",\n                            \"createdAt\": \"2022-02-19T15:42:11.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 2,\n                            \"articleId\": 1,\n                            \"price\": \"43.50\",\n                            \"createdAt\": \"2022-02-19T15:42:31.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 22,\n                            \"articleId\": 1,\n                            \"price\": \"57.10\",\n                            \"createdAt\": \"2022-02-28T14:27:22.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 24,\n                            \"articleId\": 1,\n                            \"price\": \"57.20\",\n                            \"createdAt\": \"2022-02-28T14:31:17.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 29,\n                            \"articleId\": 1,\n                            \"price\": \"59.20\",\n                            \"createdAt\": \"2022-03-07T00:51:20.000Z\"\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Change order status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newStatus\": \"rejected\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/order/23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"order",
+								"23"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Change order status succes",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"newStatus\": \"rejected\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/order/23",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"order",
+										"23"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1316"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"524-ucWyckwFRBYoC1lgDi0ABXwR4K4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:39:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"orderId\": 23,\n    \"createdAt\": \"2022-03-07T15:38:19.000Z\",\n    \"cartId\": 21,\n    \"status\": \"rejected\",\n    \"cart\": {\n        \"cartId\": 21,\n        \"userId\": 1,\n        \"createdAt\": \"2022-03-07T15:38:16.000Z\",\n        \"user\": {\n            \"userId\": 1,\n            \"email\": \"test@test.bh\",\n            \"passwordHash\": \"DDAF35A193617ABACC417349AE20413112E6FA4E89A97EA20A9EEEE64B55D39A2192992A274FC1A836BA3C23A3FEEBBD454D4423643CE80E2A9AC94FA54CA49F\",\n            \"forename\": \"Adnan\",\n            \"surname\": \"Mahmic\",\n            \"phoneNumber\": \"+387 838 838\",\n            \"postalAddres\": \"Nepoznata adresa bb\"\n        },\n        \"cartArticles\": [\n            {\n                \"cartArticleId\": 23,\n                \"cartId\": 21,\n                \"articleId\": 1,\n                \"quantity\": 2,\n                \"article\": {\n                    \"articleId\": 1,\n                    \"name\": \"Kingston 1TB\",\n                    \"categoryId\": 5,\n                    \"excerpt\": \"Neki kratak tekst...\",\n                    \"description\": \"Neki malo duzi tekst o proizvodu\",\n                    \"status\": \"visible\",\n                    \"isPromoted\": 1,\n                    \"createdAt\": \"2022-02-18T22:32:47.000Z\",\n                    \"category\": {\n                        \"categoryId\": 5,\n                        \"name\": \"Hard diskovi\",\n                        \"imagePath\": \"assets/hdds.jpg\",\n                        \"parentCategoryId\": 4\n                    },\n                    \"articlePrices\": [\n                        {\n                            \"articlePriceId\": 1,\n                            \"articleId\": 1,\n                            \"price\": \"45.00\",\n                            \"createdAt\": \"2022-02-19T15:42:11.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 2,\n                            \"articleId\": 1,\n                            \"price\": \"43.50\",\n                            \"createdAt\": \"2022-02-19T15:42:31.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 22,\n                            \"articleId\": 1,\n                            \"price\": \"57.10\",\n                            \"createdAt\": \"2022-02-28T14:27:22.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 24,\n                            \"articleId\": 1,\n                            \"price\": \"57.20\",\n                            \"createdAt\": \"2022-02-28T14:31:17.000Z\"\n                        },\n                        {\n                            \"articlePriceId\": 29,\n                            \"articleId\": 1,\n                            \"price\": \"59.20\",\n                            \"createdAt\": \"2022-03-07T00:51:20.000Z\"\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}"
 						}
 					]
 				}
