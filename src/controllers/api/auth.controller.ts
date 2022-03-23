@@ -44,7 +44,7 @@ export class AuthController {
         jwtData.role = "administrator";
         jwtData.id = administrator.administratorId;
         jwtData.identity = administrator.username;
-        jwtData.exp = this.getDatePlus(60 * 5);
+        jwtData.exp = this.getDatePlus(60 * 5 * 60 * 1000);
         jwtData.ip = req.ip.toString();
         jwtData.ua = req.headers["user-agent"];
 
@@ -54,7 +54,7 @@ export class AuthController {
         jwtRefreshData.role = jwtData.role;
         jwtRefreshData.id = jwtData.id;
         jwtRefreshData.identity = jwtData.identity;
-        jwtRefreshData.exp = this.getDatePlus(60 * 60 * 24 * 31);
+        jwtRefreshData.exp = this.getDatePlus(60 * 60 * 24 * 31 * 10);
         jwtRefreshData.ip = jwtData.ip;
         jwtRefreshData.ua = jwtData.ua;
 
