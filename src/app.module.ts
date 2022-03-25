@@ -29,7 +29,7 @@ import { CartService } from './services/cart/cart.service';
 import { UserCartController } from './controllers/api/user.cart.controller';
 import { OrderService } from './services/order/order.service';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { MailConfig } from 'config/mail.config';
+import { MailConfig } from 'config/mail.configs';
 import { OrderMailer } from './services/order/order.mailer.service';
 import { AdministratorOrderController } from './controllers/api/administrator.order.controller';
 import { UserToken } from './entities/user-token.entity';

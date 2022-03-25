@@ -1,6 +1,6 @@
 import { MailerService } from "@nestjs-modules/mailer";
 import { Injectable } from "@nestjs/common";
-import { MailConfig } from "config/mail.config";
+import { MailConfig } from "config/mail.configs";
 import { CartArticle } from "src/entities/cart-article.entity";
 import { Order } from "src/entities/order.entity";
 

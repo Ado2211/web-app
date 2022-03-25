@@ -1,5 +1,8 @@
+const jwt = require("jsonwebtoken")
+
 import { NestMiddleware, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { NextFunction, Request, Response } from "express";
+
 import { JwtDataDto } from "src/dtos/auth/jwt.data.dto";
 import { jwtSecret } from "config/jwt.secret";
 import { AdministratorService } from "src/services/administrator/administrator.service";
@@ -26,10 +29,8 @@ export class AuthMiddleware implements NestMiddleware {
 
         const tokenString = tokenParts[1];
 
-        const jwt = require("jsonwebtoken")
-
         let jwtData: JwtDataDto;
-
+        
         try {
             jwtData = jwt.verify(tokenString, jwtSecret);
         } catch (e) {
@@ -66,7 +67,7 @@ export class AuthMiddleware implements NestMiddleware {
         }
 
         req.token = jwtData;
-        
+
         next();
     }
 }
