@@ -17,7 +17,6 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
 import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 import { ArticleSearchDto } from "src/dtos/article/article.search.dto";
 
-
 @Controller('api/article')
 @Crud({
     model: {
@@ -44,7 +43,7 @@ import { ArticleSearchDto } from "src/dtos/article/article.search.dto";
             articleFeatures: {
                 eager: true
             },
-            features: { 
+            features: {
                 eager: true
             }
         }
@@ -53,7 +52,6 @@ import { ArticleSearchDto } from "src/dtos/article/article.search.dto";
         only: [
             'getOneBase',
             'getManyBase',
-            
         ],
         getOneBase: {
             decorators: [
@@ -176,7 +174,7 @@ export class ArticleController {
 
         const savedPhoto = await this.photoService.add(newPhoto);
         if (!savedPhoto) {
-            return new ApiResponse('error', -4001,'adakfkfal');
+            return new ApiResponse('error', -4001,"");
         }
 
         return savedPhoto;
@@ -239,9 +237,7 @@ export class ArticleController {
     @Post('search')
     @UseGuards(RoleCheckerGuard)
     @AllowToRoles('administrator', 'user')
-     async search(@Body() data: ArticleSearchDto): Promise<Article[]> {
-         return;
-     }
-
-    
+    async search(@Body() data: ArticleSearchDto): Promise<Article[] | ApiResponse> {
+        return await this.service.search(data);
+    }
 }

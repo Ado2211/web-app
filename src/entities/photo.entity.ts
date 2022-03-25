@@ -4,7 +4,7 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn
 } from "typeorm";
 import { Article } from "./article.entity";
 import * as Validator from 'class-validator';
@@ -16,23 +16,25 @@ export class Photo {
   @PrimaryGeneratedColumn({ type: "int", name: "photo_id", unsigned: true })
   photoId: number;
 
-  @Column("int", { name: "article_id", unsigned: true })
+  @Column({ type: "int", name: "article_id", unsigned: true })
   articleId: number;
 
-  @Column("varchar", {
+  @Column({
+    type: "varchar",
     name: "image_path",
     unique: true,
-    length: 128,
+    length: 128
   })
   @Validator.IsNotEmpty()
   @Validator.IsString()
   @Validator.Length(1, 128)
   imagePath: string;
 
-  @ManyToOne(() => Article, (article) => article.photos, {
-    onDelete: "RESTRICT",
-    onUpdate: "CASCADE",
-  })
+  @ManyToOne(
+    () => Article,
+    article => article.photos,
+    { onDelete: "NO ACTION", onUpdate: "CASCADE" }
+  )
   @JoinColumn([{ name: "article_id", referencedColumnName: "articleId" }])
   article: Article;
 }

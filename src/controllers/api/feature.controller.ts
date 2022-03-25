@@ -1,10 +1,10 @@
-import { Controller, Get, Param, UseGuards } from "@nestjs/common";
+import { Controller, UseGuards, Get, Param } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import DistinctFeatureValuesDto from "src/dtos/feature/distinct.feature.values.dto";
 import { Feature } from "src/entities/feature.entity";
+import { FeatureService } from "src/services/feature/feature.service";
 import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 import { RoleCheckerGuard } from "src/misc/role.checker.guard";
-import { FeatureService } from "src/services/feature/feature.service";
+import DistinctFeatureValuesDto from "src/dtos/feature/distinct.feature.values.dto";
 
 @Controller('api/feature')
 @Crud({
@@ -24,7 +24,7 @@ import { FeatureService } from "src/services/feature/feature.service";
                 eager: true
             },
             articleFeatures: {
-                eager: true
+                eager: false
             },
             articles: {
                 eager: false
@@ -38,7 +38,6 @@ import { FeatureService } from "src/services/feature/feature.service";
             "updateOneBase",
             "getManyBase",
             "getOneBase",
-            
         ],
         createOneBase: {
             decorators: [
@@ -46,28 +45,24 @@ import { FeatureService } from "src/services/feature/feature.service";
                 AllowToRoles('administrator'),
             ],
         },
-
         createManyBase: {
             decorators: [
                 UseGuards(RoleCheckerGuard),
                 AllowToRoles('administrator'),
             ],
         },
-
         updateOneBase: {
             decorators: [
                 UseGuards(RoleCheckerGuard),
                 AllowToRoles('administrator'),
             ],
         },
-
         getManyBase: {
             decorators: [
                 UseGuards(RoleCheckerGuard),
                 AllowToRoles('administrator', 'user'),
             ],
         },
-
         getOneBase: {
             decorators: [
                 UseGuards(RoleCheckerGuard),

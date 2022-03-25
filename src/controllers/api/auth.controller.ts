@@ -44,7 +44,7 @@ export class AuthController {
         jwtData.role = "administrator";
         jwtData.id = administrator.administratorId;
         jwtData.identity = administrator.username;
-        jwtData.exp = this.getDatePlus(60 * 5 * 60 * 1000);
+        jwtData.exp = this.getDatePlus(60 * 5 * 60 * 1000 * 2);
         jwtData.ip = req.ip.toString();
         jwtData.ua = req.headers["user-agent"];
 
@@ -54,7 +54,7 @@ export class AuthController {
         jwtRefreshData.role = jwtData.role;
         jwtRefreshData.id = jwtData.id;
         jwtRefreshData.identity = jwtData.identity;
-        jwtRefreshData.exp = this.getDatePlus(60 * 60 * 24 * 31 * 10);
+        jwtRefreshData.exp = this.getDatePlus(60 * 60 * 24 * 31 * 10 * 2);
         jwtRefreshData.ip = jwtData.ip;
         jwtRefreshData.ua = jwtData.ua;
 
@@ -120,7 +120,7 @@ export class AuthController {
         jwtData.role = jwtRefreshData.role;
         jwtData.id = jwtRefreshData.id;
         jwtData.identity = jwtRefreshData.identity;
-        jwtData.exp = this.getDatePlus(60 * 5);
+        jwtData.exp = this.getDatePlus(60 * 10);
         jwtData.ip = jwtRefreshData.ip;
         jwtData.ua = jwtRefreshData.ua;
 
@@ -162,7 +162,7 @@ export class AuthController {
         jwtData.role = "user";
         jwtData.id = user.userId;
         jwtData.identity = user.email;
-        jwtData.exp = this.getDatePlus(60 * 1);
+        jwtData.exp = this.getDatePlus(60 * 5 * 60 * 1000 * 2);
         jwtData.ip = req.ip.toString();
         jwtData.ua = req.headers["user-agent"];
 
@@ -172,7 +172,7 @@ export class AuthController {
         jwtRefreshData.role = jwtData.role;
         jwtRefreshData.id = jwtData.id;
         jwtRefreshData.identity = jwtData.identity;
-        jwtRefreshData.exp = this.getDatePlus(60 * 60 * 24 * 31);
+        jwtRefreshData.exp = this.getDatePlus(60 * 60 * 24 * 31 * 12);
         jwtRefreshData.ip = jwtData.ip;
         jwtRefreshData.ua = jwtData.ua;
 
@@ -238,7 +238,7 @@ export class AuthController {
         jwtData.role = jwtRefreshData.role;
         jwtData.id = jwtRefreshData.id;
         jwtData.identity = jwtRefreshData.identity;
-        jwtData.exp = this.getDatePlus(60 * 5);
+        jwtData.exp = this.getDatePlus(60 * 5 * 60 * 1000 * 2);
         jwtData.ip = jwtRefreshData.ip;
         jwtData.ua = jwtRefreshData.ua;
 
