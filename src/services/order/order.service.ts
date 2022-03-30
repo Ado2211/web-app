@@ -40,6 +40,7 @@ export class OrderService {
 
         const newOrder: Order = new Order();
         newOrder.cartId = cartId;
+       newOrder.userId = cart.userId;
         const savedOrder = await this.order.save(newOrder);
 
         cart.createdAt = new Date();

@@ -77,6 +77,12 @@ export class UserCartController {
     @UseGuards(RoleCheckerGuard)
     @AllowToRoles('user')
     async getOrders(@Req() req: Request): Promise<Order[]> {
-        return await this.orderService.getAllByUserId(req.token.id);
+        const userIds= await this.orderService.getAllByUserId(req.token.id);
+
+        
+
+        return userIds
+       
     }
 }
+
